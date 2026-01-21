@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "updated": 1769031463436,
+  "files": {
+    "/root/Beautify/lib/utils.ts": {
+      "exports": [
+        "cn"
+      ],
+      "imports": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "indexed": 1769016794728
+    },
+    "/root/Beautify/components/theme-provider.tsx": {
+      "exports": [
+        "ThemeProvider"
+      ],
+      "imports": [
+        "next-themes"
+      ],
+      "indexed": 1769016921211
+    },
+    "/root/Beautify/app/layout.tsx": {
+      "exports": [
+        "metadata",
+        "default",
+        "RootLayout"
+      ],
+      "imports": [
+        "next/font/google",
+        "@/components/theme-provider",
+        "./globals.css"
+      ],
+      "indexed": 1769031292189
+    },
+    "/root/Beautify/components/theme-toggle.tsx": {
+      "exports": [
+        "ThemeToggle"
+      ],
+      "imports": [
+        "lucide-react",
+        "next-themes",
+        "react"
+      ],
+      "indexed": 1769031423685
+    },
+    "/root/Beautify/lib/data.ts": {
+      "exports": [
+        "getGeminiApiKey",
+        "validateEnvironment"
+      ],
+      "imports": [
+        "server-only"
+      ],
+      "indexed": 1769017416531
+    },
+    "/root/Beautify/app/page.tsx": {
+      "exports": [
+        "default",
+        "Home"
+      ],
+      "imports": [
+        "@/components/theme-toggle",
+        "@/components/upload-zone"
+      ],
+      "indexed": 1769031314051
+    },
+    "/root/Beautify/next.config.ts": {
+      "exports": [
+        "default",
+        "withBundleAnalyzer"
+      ],
+      "imports": [
+        "@next/bundle-analyzer"
+      ],
+      "indexed": 1769019685839
+    },
+    "/root/Beautify/components/upload-zone.tsx": {
+      "exports": [
+        "UploadZone"
+      ],
+      "imports": [
+        "react",
+        "lucide-react",
+        "@/components/sparkle-effect",
+        "@/components/before-after-slider"
+      ],
+      "indexed": 1769031362832
+    },
+    "/root/Beautify/lib/rate-limit.ts": {
+      "exports": [
+        "checkRateLimit"
+      ],
+      "imports": [],
+      "indexed": 1769023458892
+    },
+    "/root/Beautify/lib/image-validation.ts": {
+      "exports": [
+        "calculateBase64Size",
+        "validateBase64Image"
+      ],
+      "imports": [],
+      "indexed": 1769023479271
+    },
+    "/root/Beautify/app/api/transform/route.ts": {
+      "exports": [
+        "maxDuration",
+        "POST"
+      ],
+      "imports": [
+        "next/server",
+        "@/lib/rate-limit",
+        "@/lib/image-validation",
+        "@/lib/gemini"
+      ],
+      "indexed": 1769029720581
+    },
+    "/root/Beautify/lib/gemini.ts": {
+      "exports": [
+        "transformImage",
+        "TransformResult"
+      ],
+      "imports": [
+        "@google/genai",
+        "@/lib/data",
+        "@/lib/prompt-engineering",
+        "server-only"
+      ],
+      "indexed": 1769026127007
+    },
+    "/root/Beautify/lib/prompt-engineering.ts": {
+      "exports": [
+        "generateMysticalPrompt"
+      ],
+      "imports": [],
+      "indexed": 1769031112481
+    },
+    "/root/Beautify/components/sparkle-effect.tsx": {
+      "exports": [
+        "SparkleEffect"
+      ],
+      "imports": [
+        "react"
+      ],
+      "indexed": 1769031463436
+    },
+    "/root/Beautify/components/before-after-slider.tsx": {
+      "exports": [
+        "BeforeAfterSlider"
+      ],
+      "imports": [
+        "react-compare-slider"
+      ],
+      "indexed": 1769031411689
+    }
+  }
+}

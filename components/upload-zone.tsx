@@ -1,8 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Upload, Loader2, Download, RefreshCw, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Upload, Loader2, Download, RefreshCw, Sparkles, ImageIcon } from "lucide-react"
 import { SparkleEffect } from "@/components/sparkle-effect"
 import { BeforeAfterSlider } from "@/components/before-after-slider"
 
@@ -33,7 +32,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
 
   const handleFile = useCallback(
     (file: File) => {
-      // Clear previous state
       setError(null)
       setPreviewUrl(null)
       setFileName(null)
@@ -43,11 +41,9 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         return
       }
 
-      // Start loading
       setIsLoading(true)
       setFileName(file.name)
 
-      // Read file as data URL for preview
       const reader = new FileReader()
       reader.onload = () => {
         setPreviewUrl(reader.result as string)
@@ -59,7 +55,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
       }
       reader.readAsDataURL(file)
 
-      // Notify parent if callback provided
       onFileAccepted?.(file)
     },
     [onFileAccepted]
@@ -97,7 +92,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
 
       if (result.success) {
         setTransformedUrl(result.transformedImage)
-        // Show sparkles for 3 seconds on successful transform
         setShowSparkles(true)
         setTimeout(() => setShowSparkles(false), 3000)
       } else {
@@ -161,7 +155,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
     e.stopPropagation()
   }, [])
 
-  // Attach document-level drag listeners
   useEffect(() => {
     document.addEventListener("dragenter", handleDragEnter)
     document.addEventListener("dragleave", handleDragLeave)
@@ -181,7 +174,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
     if (files && files.length > 0) {
       handleFile(files[0])
     }
-    // Reset input so the same file can be selected again
     e.target.value = ""
   }
 
@@ -196,22 +188,33 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
       {/* Full-viewport drag overlay */}
       {isDragging && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-300"
+          className="fixed inset-0 z-50 flex items-center justify-center transition-all duration-300"
           style={{
-            border: "3px dashed var(--color-accent)",
+            background: "radial-gradient(ellipse at center, rgba(3, 0, 20, 0.9) 0%, rgba(3, 0, 20, 0.95) 100%)",
+            backdropFilter: "blur(8px)",
           }}
         >
-          <div className="text-center space-y-4">
-            <Upload className="h-16 w-16 mx-auto text-accent animate-pulse" />
-            <p className="text-xl font-medium text-foreground">
-              Drop your image here
-            </p>
+          <div className="text-center space-y-6 animate-scale-in">
+            <div className="relative inline-block">
+              <div className="absolute inset-0 rounded-full bg-accent/20 blur-2xl animate-glow-pulse" />
+              <div className="relative w-24 h-24 rounded-full border-2 border-dashed border-accent/50 flex items-center justify-center">
+                <Upload className="h-10 w-10 text-accent animate-pulse" />
+              </div>
+            </div>
+            <div>
+              <p className="text-2xl font-[family-name:var(--font-cinzel)] text-gradient-gold text-glow">
+                Release to Upload
+              </p>
+              <p className="text-muted/60 mt-2 text-sm">
+                Drop your image to begin the transformation
+              </p>
+            </div>
           </div>
         </div>
       )}
 
       {/* Upload zone content */}
-      <div className="w-full max-w-md flex flex-col items-center gap-4">
+      <div className="w-full flex flex-col items-center gap-6">
         {/* Hidden file input */}
         <input
           ref={fileInputRef}
@@ -224,33 +227,52 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
 
         {/* Loading state */}
         {isLoading && (
-          <div className="flex flex-col items-center gap-4 py-8">
-            <Loader2 className="h-12 w-12 text-accent animate-spin" />
-            <p className="text-sm text-muted">Loading preview...</p>
+          <div className="flex flex-col items-center gap-6 py-12">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-accent/20 blur-xl animate-glow-pulse" />
+              <Loader2 className="h-12 w-12 text-accent animate-spin relative z-10" />
+            </div>
+            <p className="text-muted/70 text-sm tracking-wide">Preparing your image...</p>
           </div>
         )}
 
         {/* Preview state */}
         {previewUrl && !isLoading && (
-          <div className="flex flex-col items-center gap-6 w-full animate-in fade-in duration-300">
+          <div className="flex flex-col items-center gap-8 w-full animate-fade-in">
             {/* Preview or transformed image with comparison slider */}
             <div className="relative w-full flex justify-center">
-              <div className="relative animate-fade-in">
+              <div className="relative image-frame active">
                 {transformedUrl ? (
                   <BeforeAfterSlider beforeSrc={previewUrl} afterSrc={transformedUrl} />
                 ) : (
                   <img
                     src={previewUrl}
                     alt="Preview"
-                    className={`max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10 transition-opacity duration-500 ${isTransforming ? 'opacity-50' : 'opacity-100'}`}
+                    className={`max-w-full max-h-[55vh] object-contain rounded-xl transition-all duration-500 ${isTransforming ? 'opacity-40 scale-[0.99]' : 'opacity-100'}`}
                   />
                 )}
 
                 {/* Progress overlay */}
                 {isTransforming && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 rounded-lg backdrop-blur-sm">
-                    <Loader2 className="h-8 w-8 text-white animate-spin mb-3" />
-                    <p className="text-white text-sm font-medium">Making with love...</p>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center progress-overlay rounded-xl">
+                    <div className="relative mb-6">
+                      <div className="absolute inset-0 rounded-full bg-accent/30 blur-2xl animate-glow-pulse" />
+                      <div className="relative w-20 h-20 rounded-full border border-accent/30 flex items-center justify-center">
+                        <Loader2 className="h-8 w-8 text-accent animate-spin" />
+                      </div>
+                    </div>
+                    <p className="text-white/90 text-lg font-[family-name:var(--font-cinzel)] tracking-wide">
+                      Creating Magic
+                    </p>
+                    <p className="text-white/50 text-sm mt-2">
+                      Transforming your image...
+                    </p>
+                    {/* Animated dots */}
+                    <div className="flex gap-1.5 mt-4">
+                      <div className="w-2 h-2 rounded-full bg-accent/60 animate-pulse" style={{ animationDelay: '0s' }} />
+                      <div className="w-2 h-2 rounded-full bg-accent/60 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                      <div className="w-2 h-2 rounded-full bg-accent/60 animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    </div>
                   </div>
                 )}
 
@@ -260,65 +282,97 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-3 animate-slide-up">
+            <div className="flex gap-4 animate-slide-up">
               {!transformedUrl && (
-                <Button onClick={handleTransform} disabled={isTransforming}>
+                <button
+                  onClick={handleTransform}
+                  disabled={isTransforming}
+                  className="btn-cosmic px-8 py-3 rounded-xl flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   {isTransforming ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Loader2 className="h-5 w-5 animate-spin" />
                   ) : (
-                    <Sparkles className="h-4 w-4" />
+                    <Sparkles className="h-5 w-5" />
                   )}
-                  {isTransforming ? 'Creating...' : 'Create'}
-                </Button>
+                  <span className="text-sm font-semibold">
+                    {isTransforming ? 'Creating...' : 'Transform'}
+                  </span>
+                </button>
               )}
               {transformedUrl && (
-                <Button asChild>
-                  <a href={transformedUrl} download={`MsFrozen-${fileName?.replace(/\.[^/.]+$/, '') || 'image'}.jpg`}>
-                    <Download className="h-4 w-4" />
-                    Download
-                  </a>
-                </Button>
+                <a
+                  href={transformedUrl}
+                  download={`MsFrozen-${fileName?.replace(/\.[^/.]+$/, '') || 'image'}.jpg`}
+                  className="btn-cosmic px-8 py-3 rounded-xl flex items-center gap-3"
+                >
+                  <Download className="h-5 w-5" />
+                  <span className="text-sm font-semibold">Download</span>
+                </a>
               )}
-              <Button variant="outline" onClick={handleReset}>
-                <RefreshCw className="h-4 w-4" />
-                New
-              </Button>
+              <button
+                onClick={handleReset}
+                className="btn-ghost-cosmic px-6 py-3 rounded-xl flex items-center gap-3"
+              >
+                <RefreshCw className="h-5 w-5" />
+                <span className="text-sm font-medium">New</span>
+              </button>
             </div>
 
             {/* Transform error message */}
             {transformError && (
-              <p className="text-sm text-red-500 dark:text-red-400" role="alert">
-                {transformError}
-              </p>
+              <div className="px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20">
+                <p className="text-sm text-red-400" role="alert">
+                  {transformError}
+                </p>
+              </div>
             )}
           </div>
         )}
 
         {/* Upload state (default) */}
         {!previewUrl && !isLoading && (
-          <>
-            {/* Upload button */}
-            <Button
+          <div className="w-full">
+            {/* Clickable upload zone */}
+            <button
               onClick={handleButtonClick}
               disabled={disabled}
-              className="gap-2"
+              className="upload-zone w-full py-16 px-8 flex flex-col items-center gap-6 cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 group"
             >
-              <Upload className="h-4 w-4" />
-              Upload
-            </Button>
+              {/* Upload icon with glow */}
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-accent/10 blur-xl scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative w-20 h-20 rounded-full border border-accent/20 flex items-center justify-center group-hover:border-accent/40 transition-colors duration-300">
+                  <ImageIcon className="h-8 w-8 text-accent/60 group-hover:text-accent transition-colors duration-300" />
+                </div>
+              </div>
 
-            {/* Accepted formats hint */}
-            <p className="text-sm text-muted">
-              JPEG, PNG, or WebP
-            </p>
-          </>
+              {/* Text */}
+              <div className="text-center space-y-2">
+                <p className="text-foreground/80 font-medium text-lg">
+                  Drop your image here
+                </p>
+                <p className="text-muted/50 text-sm">
+                  or click to browse
+                </p>
+              </div>
+
+              {/* Format hint */}
+              <div className="flex items-center gap-3 text-xs text-muted/40">
+                <span className="px-2 py-1 rounded-md bg-accent/5 border border-accent/10">JPG</span>
+                <span className="px-2 py-1 rounded-md bg-accent/5 border border-accent/10">PNG</span>
+                <span className="px-2 py-1 rounded-md bg-accent/5 border border-accent/10">WebP</span>
+              </div>
+            </button>
+          </div>
         )}
 
         {/* Error message */}
         {error && (
-          <p className="text-sm text-red-500 dark:text-red-400" role="alert">
-            {error}
-          </p>
+          <div className="px-4 py-3 rounded-lg bg-red-500/10 border border-red-500/20">
+            <p className="text-sm text-red-400" role="alert">
+              {error}
+            </p>
+          </div>
         )}
       </div>
     </>

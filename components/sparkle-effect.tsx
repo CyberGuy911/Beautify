@@ -9,22 +9,64 @@ interface Sparkle {
   size: number
   delay: number
   duration: number
+  type: 'star' | 'circle' | 'diamond'
+  color: string
 }
 
 interface SparkleEffectProps {
   active: boolean
 }
 
+const COLORS = [
+  '#d4af37', // gold
+  '#f5d97e', // light gold
+  '#b87333', // copper
+  '#ffffff', // white
+  '#e5c158', // bright gold
+]
+
 function generateSparkles(count: number): Sparkle[] {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
-    // Random position around the edges and throughout
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: 5 + Math.random() * 7, // 5-12px
-    delay: Math.random() * 0.5,
-    duration: 1 + Math.random() * 1, // 1-2s
+    x: Math.random() * 120 - 10, // Allow overflow
+    y: Math.random() * 120 - 10,
+    size: 4 + Math.random() * 10,
+    delay: Math.random() * 0.8,
+    duration: 0.8 + Math.random() * 1.2,
+    type: ['star', 'circle', 'diamond'][Math.floor(Math.random() * 3)] as Sparkle['type'],
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
   }))
+}
+
+function SparkleShape({ type, color }: { type: Sparkle['type'], color: string }) {
+  if (type === 'star') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
+        <path
+          d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"
+          fill={color}
+        />
+      </svg>
+    )
+  }
+
+  if (type === 'diamond') {
+    return (
+      <svg viewBox="0 0 24 24" fill="none" className="w-full h-full">
+        <path
+          d="M12 0L24 12L12 24L0 12L12 0Z"
+          fill={color}
+        />
+      </svg>
+    )
+  }
+
+  return (
+    <div
+      className="w-full h-full rounded-full"
+      style={{ backgroundColor: color }}
+    />
+  )
 }
 
 export function SparkleEffect({ active }: SparkleEffectProps) {
@@ -32,7 +74,7 @@ export function SparkleEffect({ active }: SparkleEffectProps) {
 
   useEffect(() => {
     if (active) {
-      setSparkles(generateSparkles(30))
+      setSparkles(generateSparkles(40))
     } else {
       setSparkles([])
     }
@@ -41,7 +83,7 @@ export function SparkleEffect({ active }: SparkleEffectProps) {
   if (!active || sparkles.length === 0) return null
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-visible">
+    <div className="absolute inset-0 pointer-events-none overflow-visible z-10">
       {sparkles.map((sparkle) => (
         <div
           key={sparkle.id}
@@ -53,18 +95,10 @@ export function SparkleEffect({ active }: SparkleEffectProps) {
             height: sparkle.size,
             animationDelay: `${sparkle.delay}s`,
             animationDuration: `${sparkle.duration}s`,
+            filter: `drop-shadow(0 0 ${sparkle.size / 2}px ${sparkle.color})`,
           }}
         >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            className="w-full h-full"
-          >
-            <path
-              d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z"
-              fill="gold"
-            />
-          </svg>
+          <SparkleShape type={sparkle.type} color={sparkle.color} />
         </div>
       ))}
     </div>
