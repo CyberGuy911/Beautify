@@ -30,12 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Google Cloud billing alerts active at $50/$100/$200 thresholds
   4. User can toggle between dark and light mode
   5. Base UI displays with Tailwind CSS styling
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
-- [ ] 01-03: TBD
+- [ ] 01-01-PLAN.md — Project setup with Next.js 16, Tailwind v4, and theme system foundation
+- [ ] 01-02-PLAN.md — UI shell with theme toggle component and page layout
+- [ ] 01-03-PLAN.md — Environment security with Data Access Layer and billing alerts
 
 ### Phase 2: Upload Pipeline
 **Goal**: Users can upload, preview, and download images without AI (prove file handling)
@@ -114,11 +114,11 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Environment Setup | 0/3 | Not started | - |
+| 1. Foundation & Environment Setup | 0/3 | Planned | - |
 | 2. Upload Pipeline | 0/3 | Not started | - |
 | 3. API Route & Mock Transformation | 0/2 | Not started | - |
 | 4. Gemini Integration | 0/3 | Not started | - |
