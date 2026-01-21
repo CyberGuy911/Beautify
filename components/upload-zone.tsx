@@ -1,14 +1,14 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Upload } from "lucide-react"
+import { Upload, Loader2, Download, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
 const ACCEPTED_EXTENSIONS = ".jpg, .jpeg, .png, .webp"
 
 interface UploadZoneProps {
-  onFileAccepted: (file: File) => void
+  onFileAccepted?: (file: File) => void
   disabled?: boolean
 }
 
@@ -19,23 +19,52 @@ function isValidFileType(file: File): boolean {
 export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps) {
   const [isDragging, setIsDragging] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [fileName, setFileName] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dragCounterRef = useRef(0)
 
   const handleFile = useCallback(
     (file: File) => {
-      // Clear previous error
+      // Clear previous state
       setError(null)
+      setPreviewUrl(null)
+      setFileName(null)
 
       if (!isValidFileType(file)) {
         setError("Please upload a JPEG, PNG, or WebP image")
         return
       }
 
-      onFileAccepted(file)
+      // Start loading
+      setIsLoading(true)
+      setFileName(file.name)
+
+      // Read file as data URL for preview
+      const reader = new FileReader()
+      reader.onload = () => {
+        setPreviewUrl(reader.result as string)
+        setIsLoading(false)
+      }
+      reader.onerror = () => {
+        setError("Failed to read file")
+        setIsLoading(false)
+      }
+      reader.readAsDataURL(file)
+
+      // Notify parent if callback provided
+      onFileAccepted?.(file)
     },
     [onFileAccepted]
   )
+
+  const handleReset = useCallback(() => {
+    setPreviewUrl(null)
+    setFileName(null)
+    setError(null)
+    setIsLoading(false)
+  }, [])
 
   const handleDrop = useCallback(
     (e: DragEvent) => {
@@ -146,23 +175,64 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
           accept={ACCEPTED_EXTENSIONS}
           onChange={handleInputChange}
           className="hidden"
-          disabled={disabled}
+          disabled={disabled || isLoading}
         />
 
-        {/* Upload button */}
-        <Button
-          onClick={handleButtonClick}
-          disabled={disabled}
-          className="gap-2"
-        >
-          <Upload className="h-4 w-4" />
-          Upload
-        </Button>
+        {/* Loading state */}
+        {isLoading && (
+          <div className="flex flex-col items-center gap-4 py-8">
+            <Loader2 className="h-12 w-12 text-accent animate-spin" />
+            <p className="text-sm text-muted">Loading preview...</p>
+          </div>
+        )}
 
-        {/* Accepted formats hint */}
-        <p className="text-sm text-muted">
-          JPEG, PNG, or WebP
-        </p>
+        {/* Preview state */}
+        {previewUrl && !isLoading && (
+          <div className="flex flex-col items-center gap-6 w-full animate-in fade-in duration-300">
+            {/* Preview image */}
+            <div className="relative w-full flex justify-center">
+              <img
+                src={previewUrl}
+                alt="Preview"
+                className="max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10"
+              />
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex gap-3">
+              <Button asChild>
+                <a href={previewUrl} download={fileName || "image"}>
+                  <Download className="h-4 w-4" />
+                  Download
+                </a>
+              </Button>
+              <Button variant="outline" onClick={handleReset}>
+                <RefreshCw className="h-4 w-4" />
+                New
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* Upload state (default) */}
+        {!previewUrl && !isLoading && (
+          <>
+            {/* Upload button */}
+            <Button
+              onClick={handleButtonClick}
+              disabled={disabled}
+              className="gap-2"
+            >
+              <Upload className="h-4 w-4" />
+              Upload
+            </Button>
+
+            {/* Accepted formats hint */}
+            <p className="text-sm text-muted">
+              JPEG, PNG, or WebP
+            </p>
+          </>
+        )}
 
         {/* Error message */}
         {error && (
