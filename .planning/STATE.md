@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 ## Current Position
 
 Phase: 3 of 5 (API Mock Transformation)
-Plan: 1 of 1 in Phase 3
+Plan: 2 of 2 in Phase 3
 Status: Phase complete
-Last activity: 2026-01-21 - Completed 03-01-PLAN.md (API Route & Validation)
+Last activity: 2026-01-21 - Completed 03-02-PLAN.md (UI Integration)
 
-Progress: [█████░░░░░] 43% (6/14 plans)
+Progress: [██████░░░░] 50% (7/14 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
-- Average duration: 6 min
-- Total execution time: 33 min (0.55 hours)
+- Total plans completed: 7
+- Average duration: 5 min
+- Total execution time: 37 min (0.62 hours)
 
 **By Phase:**
 
@@ -29,11 +29,11 @@ Progress: [█████░░░░░] 43% (6/14 plans)
 |-------|-------|-------|----------|
 | 01-foundation | 3/3 | 23 min | 8 min |
 | 02-upload-pipeline | 2/2 | 6 min | 3 min |
-| 03-api-mock-transformation | 1/1 | 4 min | 4 min |
+| 03-api-mock-transformation | 2/2 | 8 min | 4 min |
 
 **Recent Trend:**
-- Last 3 plans: 02-01 (3 min), 02-02 (3 min), 03-01 (4 min)
-- Trend: Very fast execution
+- Last 3 plans: 02-02 (3 min), 03-01 (4 min), 03-02 (4 min)
+- Trend: Consistently fast execution
 
 *Updated after each plan completion*
 
@@ -61,6 +61,9 @@ Recent decisions affecting current work:
 - Node.js Buffer for base64 validation (native API, no dependencies)
 - Mock transformation returns original image (proves pipeline without AI costs)
 - Rate limit per IP via x-forwarded-for header (5 req/min default)
+- Button stays in place during loading (no layout shift)
+- Transformed image replaces preview with fade animation
+- Download adds 'transformed-' prefix to filename
 
 ### Pending Todos
 
@@ -74,7 +77,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-21
-Stopped at: Completed 03-01-PLAN.md (API Route & Validation) - Phase 3 complete
+Stopped at: Completed 03-02-PLAN.md (UI Integration) - Phase 3 complete
 Resume file: None
 
 ## Phase 1 Completion Summary
@@ -102,10 +105,12 @@ Key artifacts:
 
 ## Phase 3 Completion Summary
 
-All 1 plan complete:
+All 2 plans complete:
 - 03-01: API route with rate limiting and validation
+- 03-02: UI integration with transform API
 
 Key artifacts:
 - `lib/rate-limit.ts` - In-memory Map-based rate limiter with cleanup
 - `lib/image-validation.ts` - Base64 validation and size checking
 - `app/api/transform/route.ts` - POST handler with mock transformation
+- `components/upload-zone.tsx` - Complete upload → transform → download flow
