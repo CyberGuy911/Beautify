@@ -9,19 +9,19 @@ See: .planning/PROJECT.md (updated 2026-01-21)
 
 ## Current Position
 
-Phase: 4 of 5 (Gemini Integration)
-Plan: 2 of 2 in Phase 4
-Status: Phase complete
-Last activity: 2026-01-21 - Completed 04-02-PLAN.md (Transformation UX)
+Phase: 5 of 5 (Output Features & Production Readiness)
+Plan: 1 of 2 in Phase 5
+Status: In progress
+Last activity: 2026-01-21 - Completed 05-01-PLAN.md (Output Polish)
 
-Progress: [█████████░] 90% (9/9 plans in Phases 1-4)
+Progress: [██████████] 91% (10/11 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: 5 min
-- Total execution time: 44 min (0.73 hours)
+- Total execution time: 48 min (0.80 hours)
 
 **By Phase:**
 
@@ -31,9 +31,10 @@ Progress: [█████████░] 90% (9/9 plans in Phases 1-4)
 | 02-upload-pipeline | 2/2 | 6 min | 3 min |
 | 03-api-mock-transformation | 2/2 | 8 min | 4 min |
 | 04-gemini-integration | 2/2 | 7 min | 4 min |
+| 05-output-features | 1/2 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 3 plans: 03-02 (4 min), 04-01 (4 min), 04-02 (3 min)
+- Last 3 plans: 04-01 (4 min), 04-02 (3 min), 05-01 (4 min)
 - Trend: Consistently fast execution
 
 *Updated after each plan completion*
@@ -64,7 +65,7 @@ Recent decisions affecting current work:
 - Rate limit per IP via x-forwarded-for header (5 req/min default)
 - Button stays in place during loading (no layout shift)
 - Transformed image replaces preview with fade animation
-- Download adds 'transformed-' prefix to filename
+- Download adds 'MsFrozen-' prefix to filename (brand identity)
 - @google/genai SDK for Gemini API (official SDK)
 - Exponential backoff with jitter (1s-60s, 5 retries) for rate limit handling
 - User-friendly error messages mapped from API errors
@@ -72,6 +73,8 @@ Recent decisions affecting current work:
 - Custom CSS sparkle animation for React 19 compatibility (instead of react-sparkle)
 - 3-second sparkle duration for celebration effect
 - bg-black/60 backdrop for progress overlay
+- react-compare-slider for before/after image comparison
+- CSS animations with motion-reduce accessibility support
 
 ### Pending Todos
 
@@ -84,7 +87,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-21
-Stopped at: Completed 04-02-PLAN.md (Transformation UX) - Phase 4 complete
+Stopped at: Completed 05-01-PLAN.md (Output Polish) - 1/2 plans in Phase 5
 Resume file: None
 
 ## Phase 1 Completion Summary
@@ -134,3 +137,13 @@ Key artifacts:
 - `app/api/transform/route.ts` - Real Gemini transformation (replaces mock)
 - `components/sparkle-effect.tsx` - Custom gold sparkle animation component
 - `components/upload-zone.tsx` - Enhanced with "Making with love..." overlay and sparkles
+
+## Phase 5 Progress
+
+1/2 plans complete:
+- 05-01: Output polish with slider, MsFrozen branding, animations
+
+Key artifacts so far:
+- `components/before-after-slider.tsx` - Before/after image comparison using react-compare-slider
+- `components/upload-zone.tsx` - Integrated slider, MsFrozen download naming
+- `app/globals.css` - fade-in, slide-up, scale-in animations with motion-reduce
