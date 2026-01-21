@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-21)
 
 **Core value:** One-click image transformation — upload, create, download. No friction, no complexity.
-**Current focus:** Phase 3 (API Mock Transformation) - In progress
+**Current focus:** Phase 4 (Gemini Integration) - In progress
 
 ## Current Position
 
-Phase: 3 of 5 (API Mock Transformation)
-Plan: 2 of 2 in Phase 3
+Phase: 4 of 5 (Gemini Integration)
+Plan: 1 of 1 in Phase 4
 Status: Phase complete
-Last activity: 2026-01-21 - Completed 03-02-PLAN.md (UI Integration)
+Last activity: 2026-01-21 - Completed 04-01-PLAN.md (Gemini API Integration)
 
-Progress: [██████░░░░] 50% (7/14 plans)
+Progress: [████████░░] 80% (8/10 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 5 min
-- Total execution time: 37 min (0.62 hours)
+- Total execution time: 41 min (0.68 hours)
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [██████░░░░] 50% (7/14 plans)
 | 01-foundation | 3/3 | 23 min | 8 min |
 | 02-upload-pipeline | 2/2 | 6 min | 3 min |
 | 03-api-mock-transformation | 2/2 | 8 min | 4 min |
+| 04-gemini-integration | 1/1 | 4 min | 4 min |
 
 **Recent Trend:**
-- Last 3 plans: 02-02 (3 min), 03-01 (4 min), 03-02 (4 min)
+- Last 3 plans: 03-01 (4 min), 03-02 (4 min), 04-01 (4 min)
 - Trend: Consistently fast execution
 
 *Updated after each plan completion*
@@ -64,11 +65,14 @@ Recent decisions affecting current work:
 - Button stays in place during loading (no layout shift)
 - Transformed image replaces preview with fade animation
 - Download adds 'transformed-' prefix to filename
+- @google/genai SDK for Gemini API (official SDK)
+- Exponential backoff with jitter (1s-60s, 5 retries) for rate limit handling
+- User-friendly error messages mapped from API errors
+- Descriptive scene prompt following Google Nano Banana guide
 
 ### Pending Todos
 
 - (Optional) Set up Google Cloud billing alerts at $50/$100/$200 thresholds (skipped during 01-03)
-- (Phase 4) Add Gemini API key to .env.local
 
 ### Blockers/Concerns
 
@@ -77,7 +81,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-21
-Stopped at: Completed 03-02-PLAN.md (UI Integration) - Phase 3 complete
+Stopped at: Completed 04-01-PLAN.md (Gemini API Integration) - Phase 4 complete
 Resume file: None
 
 ## Phase 1 Completion Summary
@@ -114,3 +118,13 @@ Key artifacts:
 - `lib/image-validation.ts` - Base64 validation and size checking
 - `app/api/transform/route.ts` - POST handler with mock transformation
 - `components/upload-zone.tsx` - Complete upload → transform → download flow
+
+## Phase 4 Completion Summary
+
+All 1 plan complete:
+- 04-01: Gemini API integration with retry logic
+
+Key artifacts:
+- `lib/gemini.ts` - Gemini client with transformImage, exponential backoff
+- `lib/prompt-engineering.ts` - Mystical cosmic portrait prompt
+- `app/api/transform/route.ts` - Real Gemini transformation (replaces mock)
