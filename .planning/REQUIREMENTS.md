@@ -7,9 +7,9 @@
 
 ### Upload
 
-- [ ] **UPLD-01**: User can drag-and-drop an image file onto the upload area
-- [ ] **UPLD-02**: User can click to browse and select an image file
-- [ ] **UPLD-03**: App accepts JPEG, PNG, and WebP image formats
+- [x] **UPLD-01**: User can drag-and-drop an image file onto the upload area
+- [x] **UPLD-02**: User can click to browse and select an image file
+- [x] **UPLD-03**: App accepts JPEG, PNG, and WebP image formats
 
 ### Transformation
 
@@ -29,8 +29,8 @@
 - [ ] **UEXP-01**: User sees clear error messages when transformation fails
 - [x] **UEXP-02**: User can toggle between dark and light mode
 - [ ] **UEXP-03**: UI has smooth animated transitions
-- [ ] **UEXP-04**: Interface is responsive and works on mobile
-- [ ] **UEXP-05**: Interface is clean and minimal with focus on the image
+- [x] **UEXP-04**: Interface is responsive and works on mobile
+- [x] **UEXP-05**: Interface is clean and minimal with focus on the image
 
 ## v2 Requirements
 
@@ -60,9 +60,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| UPLD-01 | Phase 2 | Pending |
-| UPLD-02 | Phase 2 | Pending |
-| UPLD-03 | Phase 2 | Pending |
+| UPLD-01 | Phase 2 | Complete |
+| UPLD-02 | Phase 2 | Complete |
+| UPLD-03 | Phase 2 | Complete |
 | TRAN-01 | Phase 4 | Pending |
 | TRAN-02 | Phase 4 | Pending |
 | TRAN-03 | Phase 4 | Pending |
@@ -73,8 +73,8 @@
 | UEXP-01 | Phase 4 | Pending |
 | UEXP-02 | Phase 1 | Complete |
 | UEXP-03 | Phase 5 | Pending |
-| UEXP-04 | Phase 2 | Pending |
-| UEXP-05 | Phase 2 | Pending |
+| UEXP-04 | Phase 2 | Complete |
+| UEXP-05 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 15 total
@@ -83,4 +83,4 @@
 
 ---
 *Requirements defined: 2026-01-21*
-*Last updated: 2026-01-21 after roadmap creation*
+*Last updated: 2026-01-21 after Phase 2 completion*
