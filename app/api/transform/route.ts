@@ -3,6 +3,9 @@ import { checkRateLimit } from '@/lib/rate-limit'
 import { validateBase64Image } from '@/lib/image-validation'
 import { transformImage } from '@/lib/gemini'
 
+// Allow up to 60 seconds for Gemini transformation
+export const maxDuration = 60
+
 export async function POST(request: NextRequest) {
   try {
     // Get client identifier for rate limiting
