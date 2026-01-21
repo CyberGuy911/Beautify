@@ -8,16 +8,5 @@
  * @returns The transformation prompt string
  */
 export function generateMysticalPrompt(): string {
-  return `Transform this portrait into a mystical cosmic masterpiece.
-
-Create a portrait with:
-- Ethereal cosmic atmosphere with deep space backgrounds (nebulas, stars, galaxies)
-- Soft magical lighting with subtle sparkles and dreamy glow around the subject
-- Mystical color palette: purples, deep blues, cosmic teals, golden highlights
-- Enchanting vibe without losing the subject's realistic features and expressions
-- Creative cosmic symbols subtly integrated (constellations, celestial patterns)
-- Dramatic yet soft lighting that enhances facial features
-- Ultra-realistic finish with 4K detail and cinematic color grading
-
-Style: Fantasy portrait photography with cosmic elements, professional magazine quality, warm golden highlights, sharp facial details, whimsical magical atmosphere.`
+  return `A high-contrast, mystical photograph effect, where the central subject—whether an animal, person, or object from a user-uploaded image—is brilliantly illuminated with rich, warm golden and copper highlights and deep shadow details, making it pop. The background is transformed into a deep cosmic night sky with swirling nebulae of indigo, violet, and teal, scattered glowing stars, and a soft, ethereal moonlight glow from above, creating a dramatic, magical atmosphere.`
 }
