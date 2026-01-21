@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Upload, Loader2, Download, RefreshCw, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { SparkleEffect } from "@/components/sparkle-effect"
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
 const ACCEPTED_EXTENSIONS = ".jpg, .jpeg, .png, .webp"
@@ -25,6 +26,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
   const [isTransforming, setIsTransforming] = useState(false)
   const [transformedUrl, setTransformedUrl] = useState<string | null>(null)
   const [transformError, setTransformError] = useState<string | null>(null)
+  const [showSparkles, setShowSparkles] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dragCounterRef = useRef(0)
 
@@ -70,6 +72,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
     setTransformedUrl(null)
     setTransformError(null)
     setIsTransforming(false)
+    setShowSparkles(false)
   }, [])
 
   const handleTransform = useCallback(async () => {
@@ -93,6 +96,9 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
 
       if (result.success) {
         setTransformedUrl(result.transformedImage)
+        // Show sparkles for 3 seconds on successful transform
+        setShowSparkles(true)
+        setTimeout(() => setShowSparkles(false), 3000)
       } else {
         throw new Error(result.error || 'Transformation failed')
       }
@@ -228,11 +234,24 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
           <div className="flex flex-col items-center gap-6 w-full animate-in fade-in duration-300">
             {/* Preview or transformed image */}
             <div className="relative w-full flex justify-center">
-              <img
-                src={transformedUrl || previewUrl}
-                alt={transformedUrl ? "Transformed" : "Preview"}
-                className="max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10"
-              />
+              <div className="relative">
+                <img
+                  src={transformedUrl || previewUrl}
+                  alt={transformedUrl ? "Transformed" : "Preview"}
+                  className={`max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10 transition-opacity duration-500 ${isTransforming ? 'opacity-50' : 'opacity-100'}`}
+                />
+
+                {/* Progress overlay */}
+                {isTransforming && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 rounded-lg backdrop-blur-sm">
+                    <Loader2 className="h-8 w-8 text-white animate-spin mb-3" />
+                    <p className="text-white text-sm font-medium">Making with love...</p>
+                  </div>
+                )}
+
+                {/* Sparkle effect on completion */}
+                <SparkleEffect active={showSparkles} />
+              </div>
             </div>
 
             {/* Action buttons */}
