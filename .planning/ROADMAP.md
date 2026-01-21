@@ -50,12 +50,11 @@ Plans:
   6. Interface is responsive and works on mobile devices
   7. Interface is clean and minimal with focus on the image
   8. User sees progress indicator during upload
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
-- [ ] 02-03: TBD
+- [ ] 02-01-PLAN.md — Upload zone with drag-drop, click-to-browse, and file validation
+- [ ] 02-02-PLAN.md — Preview display, download, reset, and page integration
 
 ### Phase 3: API Route & Mock Transformation
 **Goal**: Prove client-server communication with mock responses before spending API quota
@@ -119,7 +118,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Environment Setup | 3/3 | Complete | 2026-01-21 |
-| 2. Upload Pipeline | 0/3 | Not started | - |
+| 2. Upload Pipeline | 0/2 | Not started | - |
 | 3. API Route & Mock Transformation | 0/2 | Not started | - |
 | 4. Gemini Integration | 0/3 | Not started | - |
 | 5. Output Features & Production Readiness | 0/3 | Not started | - |
