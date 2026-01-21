@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { checkRateLimit } from '@/lib/rate-limit'
 import { validateBase64Image } from '@/lib/image-validation'
+import { transformImage } from '@/lib/gemini'
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,14 +49,26 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Mock transformation (just return original with success flag)
-    // In Phase 4, this will call actual AI transformation
-    const transformedImage = image
+    // Determine MIME type from data URL prefix
+    const mimeTypeMatch = image.match(/^data:(image\/\w+);base64,/)
+    const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : 'image/jpeg'
+
+    // Call Gemini for real transformation
+    const result = await transformImage(image, mimeType)
+
+    if (!result.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: result.error || 'Transformation failed'
+        },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       success: true,
-      transformedImage,
-      message: 'Mock transformation complete'
+      transformedImage: result.transformedImage
     })
   } catch (error) {
     // Handle JSON parse errors specifically
