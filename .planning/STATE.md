@@ -5,33 +5,33 @@
 See: .planning/PROJECT.md (updated 2026-01-21)
 
 **Core value:** One-click image transformation — upload, create, download. No friction, no complexity.
-**Current focus:** Phase 2 (Upload Pipeline) - Plan 01 complete
+**Current focus:** Phase 2 (Upload Pipeline) - Complete
 
 ## Current Position
 
 Phase: 2 of 5 (Upload Pipeline)
-Plan: 1 of 2 in Phase 2
-Status: In progress
-Last activity: 2026-01-21 - Completed 02-01-PLAN.md (Upload Zone)
+Plan: 2 of 2 in Phase 2
+Status: Phase complete
+Last activity: 2026-01-21 - Completed 02-02-PLAN.md (Preview & Download)
 
-Progress: [███░░░░░░░] 29% (4/14 plans)
+Progress: [████░░░░░░] 36% (5/14 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
-- Average duration: 7 min
-- Total execution time: 26 min (0.43 hours)
+- Total plans completed: 5
+- Average duration: 6 min
+- Total execution time: 29 min (0.48 hours)
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation | 3/3 | 23 min | 8 min |
-| 02-upload-pipeline | 1/2 | 3 min | 3 min |
+| 02-upload-pipeline | 2/2 | 6 min | 3 min |
 
 **Recent Trend:**
-- Last 3 plans: 01-02 (2 min), 01-03 (8 min), 02-01 (3 min)
+- Last 3 plans: 01-03 (8 min), 02-01 (3 min), 02-02 (3 min)
 - Trend: Fast execution
 
 *Updated after each plan completion*
@@ -53,6 +53,9 @@ Recent decisions affecting current work:
 - Bundle analyzer for verifiable client bundle security
 - Drag counter pattern for reliable drag event tracking across nested elements
 - Full-viewport overlay with backdrop blur on drag
+- FileReader.readAsDataURL() for image preview generation
+- Data URL in anchor href with download attribute for file download
+- Self-managing components that handle own state internally
 
 ### Pending Todos
 
@@ -66,7 +69,7 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-21
-Stopped at: Completed 02-01-PLAN.md (Upload Zone)
+Stopped at: Completed 02-02-PLAN.md (Preview & Download) - Phase 2 complete
 Resume file: None
 
 ## Phase 1 Completion Summary
@@ -82,10 +85,12 @@ Key artifacts:
 - `app/page.tsx` - Page shell ready for upload component
 - `next.config.ts` - Bundle analyzer configured
 
-## Phase 2 Progress
+## Phase 2 Completion Summary
 
-Plan 01 complete:
+All 2 plans complete:
 - 02-01: Upload zone with drag-drop and file validation
+- 02-02: Image preview, download, and reset functionality
 
 Key artifacts:
-- `components/upload-zone.tsx` - Full-page drag-drop upload zone
+- `components/upload-zone.tsx` - Self-managing upload zone with preview/download flow
+- `app/page.tsx` - Main page with integrated upload component
