@@ -27,7 +27,7 @@
 ### User Experience
 
 - [ ] **UEXP-01**: User sees clear error messages when transformation fails
-- [ ] **UEXP-02**: User can toggle between dark and light mode
+- [x] **UEXP-02**: User can toggle between dark and light mode
 - [ ] **UEXP-03**: UI has smooth animated transitions
 - [ ] **UEXP-04**: Interface is responsive and works on mobile
 - [ ] **UEXP-05**: Interface is clean and minimal with focus on the image
@@ -71,7 +71,7 @@
 | OUTP-02 | Phase 5 | Pending |
 | OUTP-03 | Phase 5 | Pending |
 | UEXP-01 | Phase 4 | Pending |
-| UEXP-02 | Phase 1 | Pending |
+| UEXP-02 | Phase 1 | Complete |
 | UEXP-03 | Phase 5 | Pending |
 | UEXP-04 | Phase 2 | Pending |
 | UEXP-05 | Phase 2 | Pending |

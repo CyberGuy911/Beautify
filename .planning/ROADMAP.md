@@ -12,7 +12,7 @@ Beautify transforms uploaded photos into mystical cosmic portraits using AI. The
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Environment Setup** - Establish secure infrastructure and base UI
+- [x] **Phase 1: Foundation & Environment Setup** - Establish secure infrastructure and base UI
 - [ ] **Phase 2: Upload Pipeline** - De-risk file handling without AI complexity
 - [ ] **Phase 3: API Route & Mock Transformation** - Prove client-server communication
 - [ ] **Phase 4: Gemini Integration** - Connect real AI transformation
@@ -33,9 +33,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project setup with Next.js 16, Tailwind v4, and theme system foundation
-- [ ] 01-02-PLAN.md — UI shell with theme toggle component and page layout
-- [ ] 01-03-PLAN.md — Environment security with Data Access Layer and billing alerts
+- [x] 01-01-PLAN.md — Project setup with Next.js 16, Tailwind v4, and theme system foundation
+- [x] 01-02-PLAN.md — UI shell with theme toggle component and page layout
+- [x] 01-03-PLAN.md — Environment security with Data Access Layer and billing alerts
 
 ### Phase 2: Upload Pipeline
 **Goal**: Users can upload, preview, and download images without AI (prove file handling)
@@ -118,7 +118,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Environment Setup | 0/3 | Planned | - |
+| 1. Foundation & Environment Setup | 3/3 | Complete | 2026-01-21 |
 | 2. Upload Pipeline | 0/3 | Not started | - |
 | 3. API Route & Mock Transformation | 0/2 | Not started | - |
 | 4. Gemini Integration | 0/3 | Not started | - |
