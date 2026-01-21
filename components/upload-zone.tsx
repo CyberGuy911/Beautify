@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { Upload, Loader2, Download, RefreshCw, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SparkleEffect } from "@/components/sparkle-effect"
+import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
 const ACCEPTED_EXTENSIONS = ".jpg, .jpeg, .png, .webp"
@@ -232,14 +233,18 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         {/* Preview state */}
         {previewUrl && !isLoading && (
           <div className="flex flex-col items-center gap-6 w-full animate-in fade-in duration-300">
-            {/* Preview or transformed image */}
+            {/* Preview or transformed image with comparison slider */}
             <div className="relative w-full flex justify-center">
-              <div className="relative">
-                <img
-                  src={transformedUrl || previewUrl}
-                  alt={transformedUrl ? "Transformed" : "Preview"}
-                  className={`max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10 transition-opacity duration-500 ${isTransforming ? 'opacity-50' : 'opacity-100'}`}
-                />
+              <div className="relative animate-fade-in">
+                {transformedUrl ? (
+                  <BeforeAfterSlider beforeSrc={previewUrl} afterSrc={transformedUrl} />
+                ) : (
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    className={`max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10 transition-opacity duration-500 ${isTransforming ? 'opacity-50' : 'opacity-100'}`}
+                  />
+                )}
 
                 {/* Progress overlay */}
                 {isTransforming && (
@@ -255,7 +260,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 animate-slide-up">
               {!transformedUrl && (
                 <Button onClick={handleTransform} disabled={isTransforming}>
                   {isTransforming ? (
@@ -268,7 +273,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
               )}
               {transformedUrl && (
                 <Button asChild>
-                  <a href={transformedUrl} download={fileName ? `transformed-${fileName}` : 'transformed-image'}>
+                  <a href={transformedUrl} download={`MsFrozen-${fileName?.replace(/\.[^/.]+$/, '') || 'image'}.jpg`}>
                     <Download className="h-4 w-4" />
                     Download
                   </a>
