@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Upload, Loader2, Download, RefreshCw } from "lucide-react"
+import { Upload, Loader2, Download, RefreshCw, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
@@ -226,28 +226,47 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         {/* Preview state */}
         {previewUrl && !isLoading && (
           <div className="flex flex-col items-center gap-6 w-full animate-in fade-in duration-300">
-            {/* Preview image */}
+            {/* Preview or transformed image */}
             <div className="relative w-full flex justify-center">
               <img
-                src={previewUrl}
-                alt="Preview"
+                src={transformedUrl || previewUrl}
+                alt={transformedUrl ? "Transformed" : "Preview"}
                 className="max-w-full max-h-[60vh] object-contain rounded-lg shadow-lg dark:shadow-accent/10"
               />
             </div>
 
             {/* Action buttons */}
             <div className="flex gap-3">
-              <Button asChild>
-                <a href={previewUrl} download={fileName || "image"}>
-                  <Download className="h-4 w-4" />
-                  Download
-                </a>
-              </Button>
+              {!transformedUrl && (
+                <Button onClick={handleTransform} disabled={isTransforming}>
+                  {isTransforming ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Sparkles className="h-4 w-4" />
+                  )}
+                  {isTransforming ? 'Creating...' : 'Create'}
+                </Button>
+              )}
+              {transformedUrl && (
+                <Button asChild>
+                  <a href={transformedUrl} download={fileName ? `transformed-${fileName}` : 'transformed-image'}>
+                    <Download className="h-4 w-4" />
+                    Download
+                  </a>
+                </Button>
+              )}
               <Button variant="outline" onClick={handleReset}>
                 <RefreshCw className="h-4 w-4" />
                 New
               </Button>
             </div>
+
+            {/* Transform error message */}
+            {transformError && (
+              <p className="text-sm text-red-500 dark:text-red-400" role="alert">
+                {transformError}
+              </p>
+            )}
           </div>
         )}
 
