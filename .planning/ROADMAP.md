@@ -84,12 +84,11 @@ Plans:
   4. User sees the AI-transformed mystical cosmic portrait after processing
   5. User sees clear error messages when transformation fails (API errors, safety filters, rate limits)
   6. Gemini API upgraded to Tier 1 (10 IPM) and exponential backoff handles rate limits
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
-- [ ] 04-03: TBD
+- [ ] 04-01-PLAN.md — Gemini SDK integration with retry logic and prompt engineering
+- [ ] 04-02-PLAN.md — Progress overlay and sparkle celebration effect
 
 ### Phase 5: Output Features & Production Readiness
 **Goal**: Complete user experience with output features and production polish
@@ -120,5 +119,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. Foundation & Environment Setup | 3/3 | Complete | 2026-01-21 |
 | 2. Upload Pipeline | 2/2 | Complete | 2026-01-21 |
 | 3. API Route & Mock Transformation | 2/2 | Complete | 2026-01-21 |
-| 4. Gemini Integration | 0/3 | Not started | - |
+| 4. Gemini Integration | 0/2 | Not started | - |
 | 5. Output Features & Production Readiness | 0/3 | Not started | - |
