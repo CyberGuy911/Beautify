@@ -1,6 +1,14 @@
+"use client"
+
 import { ThemeToggle } from "@/components/theme-toggle"
+import { UploadZone } from "@/components/upload-zone"
 
 export default function Home() {
+  const handleFileAccepted = (file: File) => {
+    // Temporary: log file to console for verification
+    console.log("File accepted:", file.name, file.type, file.size)
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
@@ -18,9 +26,9 @@ export default function Home() {
           <p className="text-muted max-w-md mx-auto">
             Upload an image and watch it transform into a mystical cosmic portrait.
           </p>
-          {/* Upload area will be added in Phase 2 */}
-          <div className="w-full max-w-md h-64 border-2 border-dashed border-border rounded-lg flex items-center justify-center mt-8">
-            <p className="text-muted">Upload area coming soon</p>
+          {/* Upload zone */}
+          <div className="mt-8">
+            <UploadZone onFileAccepted={handleFileAccepted} />
           </div>
         </div>
       </main>
