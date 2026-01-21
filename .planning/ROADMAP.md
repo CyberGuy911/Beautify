@@ -102,12 +102,11 @@ Plans:
   5. Vercel function timeout configured to 60s to handle processing delays
   6. App deployed to Vercel with environment variables configured
   7. Error handling includes retry logic with exponential backoff
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: TBD
-- [ ] 05-02: TBD
-- [ ] 05-03: TBD
+- [ ] 05-01-PLAN.md — Output polish with BeforeAfterSlider, MsFrozen download branding, and animations
+- [ ] 05-02-PLAN.md — Vercel deployment with 60s timeout configuration
 
 ## Progress
 
@@ -120,4 +119,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Upload Pipeline | 2/2 | Complete | 2026-01-21 |
 | 3. API Route & Mock Transformation | 2/2 | Complete | 2026-01-21 |
 | 4. Gemini Integration | 2/2 | Complete | 2026-01-21 |
-| 5. Output Features & Production Readiness | 0/3 | Not started | - |
+| 5. Output Features & Production Readiness | 0/2 | Not started | - |
