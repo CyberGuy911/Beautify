@@ -22,6 +22,9 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
   const [isLoading, setIsLoading] = useState(false)
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [fileName, setFileName] = useState<string | null>(null)
+  const [isTransforming, setIsTransforming] = useState(false)
+  const [transformedUrl, setTransformedUrl] = useState<string | null>(null)
+  const [transformError, setTransformError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dragCounterRef = useRef(0)
 
@@ -64,7 +67,41 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
     setFileName(null)
     setError(null)
     setIsLoading(false)
+    setTransformedUrl(null)
+    setTransformError(null)
+    setIsTransforming(false)
   }, [])
+
+  const handleTransform = useCallback(async () => {
+    if (!previewUrl) return
+
+    setIsTransforming(true)
+    setTransformError(null)
+
+    try {
+      const response = await fetch('/api/transform', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: previewUrl }),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || `HTTP ${response.status}`)
+      }
+
+      if (result.success) {
+        setTransformedUrl(result.transformedImage)
+      } else {
+        throw new Error(result.error || 'Transformation failed')
+      }
+    } catch (err) {
+      setTransformError(err instanceof Error ? err.message : 'Transformation failed')
+    } finally {
+      setIsTransforming(false)
+    }
+  }, [previewUrl])
 
   const handleDrop = useCallback(
     (e: DragEvent) => {
