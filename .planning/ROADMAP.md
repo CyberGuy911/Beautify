@@ -67,11 +67,11 @@ Plans:
   4. Frontend displays mock transformed image
   5. Base64 payloads work within Vercel serverless constraints (<4.5MB)
   6. Rate limiting middleware prevents more than 5 requests per minute
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md — API route with base64 validation and rate limiting
+- [ ] 03-02-PLAN.md — Frontend integration with transform button and result display
 
 ### Phase 4: Gemini Integration
 **Goal**: Real AI transformation with mystical cosmic portrait effect
