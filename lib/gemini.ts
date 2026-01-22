@@ -127,7 +127,7 @@ export async function transformImage(
     // Call Gemini API with retry logic
     const response = await callWithRetry(async () => {
       return await genAI.models.generateContent({
-        model: 'gemini-2.0-pro-exp-image-generation',
+        model: 'gemini-3-pro-image-preview',
         contents: [
           {
             role: 'user',
