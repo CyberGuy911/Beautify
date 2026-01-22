@@ -262,10 +262,10 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
                       </div>
                     </div>
                     <p className="text-white/90 text-lg font-[family-name:var(--font-cinzel)] tracking-wide">
-                      Creating Magic
+                      Creating with Love
                     </p>
                     <p className="text-white/50 text-sm mt-2">
-                      Transforming your image...
+                      Making something beautiful...
                     </p>
                     {/* Animated dots */}
                     <div className="flex gap-1.5 mt-4">
@@ -295,7 +295,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
                     <Sparkles className="h-5 w-5" />
                   )}
                   <span className="text-sm font-semibold">
-                    {isTransforming ? 'Creating...' : 'Transform'}
+                    {isTransforming ? 'Creating...' : 'Beautify'}
                   </span>
                 </button>
               )}

@@ -27,7 +27,7 @@ export default function Home() {
               </svg>
             </div>
             <h1 className="font-[family-name:var(--font-cinzel)] text-2xl font-semibold tracking-wide text-gradient-gold text-glow">
-              Beautify
+              For Elsa
             </h1>
           </div>
           <ThemeToggle />
@@ -39,14 +39,14 @@ export default function Home() {
             {/* Hero text */}
             <div className="text-center mb-12 space-y-6">
               <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight animate-slide-up">
-                <span className="text-gradient-gold text-glow">Mystical</span>
+                <span className="text-gradient-gold text-glow">Made</span>
                 <br />
-                <span className="text-foreground/90">Transformation</span>
+                <span className="text-foreground/90">With Love</span>
               </h2>
               <p className="text-muted text-lg md:text-xl max-w-md mx-auto animate-slide-up delay-100 leading-relaxed">
-                Upload your photo and watch it transform into a
-                <span className="text-accent"> cosmic masterpiece </span>
-                with the power of AI
+                Upload your photo and watch it transform into
+                <span className="text-accent"> something beautiful</span>
+                , Darlin ♥
               </p>
             </div>
 
@@ -64,30 +64,15 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Subtle feature hints */}
-            <div className="mt-10 flex items-center justify-center gap-8 md:gap-12 text-sm text-muted/60 animate-fade-in delay-500">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
-                <span>AI Powered</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
-                <span>Instant Results</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-accent/50" />
-                <span>High Quality</span>
-              </div>
-            </div>
           </div>
         </main>
 
         {/* Footer */}
         <footer className="relative z-10 py-6 text-center animate-fade-in delay-300">
           <p className="text-sm text-muted/50 tracking-wide">
-            Crafted with{" "}
-            <span className="text-accent/70">Gemini</span>
-            {" "}AI Magic
+            Made with{" "}
+            <span className="text-accent/70">♥</span>
+            {" "}by Alexander
           </p>
         </footer>
       </div>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": 1769067856782,
+  "updated": 1769073902898,
   "files": {
     "/root/Beautify/lib/utils.ts": {
       "exports": [
@@ -64,7 +64,7 @@
         "@/components/theme-toggle",
         "@/components/upload-zone"
       ],
-      "indexed": 1769031314051
+      "indexed": 1769073902898
     },
     "/root/Beautify/next.config.ts": {
       "exports": [
@@ -86,7 +86,7 @@
         "@/components/sparkle-effect",
         "@/components/before-after-slider"
       ],
-      "indexed": 1769031362832
+      "indexed": 1769073709934
     },
     "/root/Beautify/lib/rate-limit.ts": {
       "exports": [
@@ -134,7 +134,7 @@
         "generateMysticalPrompt"
       ],
       "imports": [],
-      "indexed": 1769031112481
+      "indexed": 1769073371409
     },
     "/root/Beautify/components/sparkle-effect.tsx": {
       "exports": [
