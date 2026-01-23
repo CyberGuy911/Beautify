@@ -44,7 +44,9 @@ export default function Home() {
                 <span className="text-foreground/90">With Love</span>
               </h2>
               <p className="text-muted text-lg md:text-xl max-w-md mx-auto animate-slide-up delay-100 leading-relaxed">
-                Something to make your work a little easier, Darlin ♥
+                Something to make your work
+                <span className="text-accent"> a little easier</span>
+                , Darlin ♥
               </p>
             </div>
 
