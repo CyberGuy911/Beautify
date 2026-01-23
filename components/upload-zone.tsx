@@ -248,7 +248,7 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
                   <img
                     src={previewUrl}
                     alt="Preview"
-                    className={`max-w-full max-h-[55vh] object-contain rounded-xl transition-all duration-500 ${isTransforming ? 'opacity-40 scale-[0.99]' : 'opacity-100'}`}
+                    className={`max-w-full max-h-[65vh] object-contain rounded-xl transition-all duration-500 ${isTransforming ? 'opacity-40 scale-[0.99]' : 'opacity-100'}`}
                   />
                 )}
 

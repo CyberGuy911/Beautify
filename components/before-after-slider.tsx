@@ -18,7 +18,7 @@ export function BeforeAfterSlider({ beforeSrc, afterSrc }: BeforeAfterSliderProp
       <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-accent/20 via-accent-copper/20 to-accent/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <ReactCompareSlider
-        className="relative max-w-full max-h-[55vh] rounded-xl overflow-hidden"
+        className="relative max-w-full max-h-[65vh] rounded-xl overflow-hidden"
         itemOne={
           <ReactCompareSliderImage
             src={beforeSrc}
@@ -54,17 +54,10 @@ export function BeforeAfterSlider({ beforeSrc, afterSrc }: BeforeAfterSliderProp
         position={50}
         style={{
           maxWidth: "100%",
-          maxHeight: "55vh",
+          maxHeight: "65vh",
         }}
       />
 
-      {/* Labels */}
-      <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-sm border border-white/10">
-        <span className="text-xs text-white/70 font-medium tracking-wide uppercase">Original</span>
-      </div>
-      <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-lg bg-accent/20 backdrop-blur-sm border border-accent/30">
-        <span className="text-xs text-accent font-medium tracking-wide uppercase">Transformed</span>
-      </div>
     </div>
   )
 }

@@ -34,19 +34,17 @@ export default function Home() {
         </header>
 
         {/* Main content area */}
-        <main className="flex-1 flex items-center justify-center px-6 pb-16 relative z-10">
-          <div className="w-full max-w-2xl mx-auto">
+        <main className="flex-1 flex items-center justify-center px-4 md:px-6 pb-8 relative z-10">
+          <div className="w-full max-w-3xl mx-auto">
             {/* Hero text */}
-            <div className="text-center mb-12 space-y-6">
+            <div className="text-center mb-6 md:mb-8 space-y-4">
               <h2 className="font-[family-name:var(--font-cinzel)] text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight animate-slide-up">
                 <span className="text-gradient-gold text-glow">Made</span>
                 <br />
                 <span className="text-foreground/90">With Love</span>
               </h2>
               <p className="text-muted text-lg md:text-xl max-w-md mx-auto animate-slide-up delay-100 leading-relaxed">
-                Upload your photo and watch it transform into
-                <span className="text-accent"> something beautiful</span>
-                , Darlin ♥
+                Something to make your work a little easier, Darlin ♥
               </p>
             </div>
 
@@ -59,7 +57,7 @@ export default function Home() {
               <div className="corner-decoration bottom-right" />
 
               {/* Glass panel container */}
-              <div className="glass-panel rounded-2xl p-8 md:p-10">
+              <div className="glass-panel rounded-2xl p-4 md:p-6">
                 <UploadZone />
               </div>
             </div>

@@ -436,6 +436,40 @@ body {
   border-top: none;
 }
 
+/* ===== VIEWPORT FIT ===== */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Ensure full-height layout fits viewport */
+.min-h-screen {
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Adjust image size based on viewport to leave room for buttons */
+@media (min-width: 1024px) {
+  .max-h-\[65vh\] {
+    max-height: 55vh !important;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-height: 700px) {
+  .max-h-\[65vh\] {
+    max-height: 45vh !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .max-h-\[65vh\] {
+    max-height: 50vh !important;
+  }
+}
+
 /* Light mode overrides */
 :root:not(.dark) .cosmic-bg {
   background:
