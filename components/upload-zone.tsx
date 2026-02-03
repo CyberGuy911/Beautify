@@ -84,6 +84,24 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         body: JSON.stringify({ image: previewUrl }),
       })
 
+      // Check content-type before parsing as JSON
+      const contentType = response.headers.get('content-type') || ''
+      if (!contentType.includes('application/json')) {
+        // Server returned non-JSON response (error page, HTML, etc.)
+        const text = await response.text()
+        console.error('Non-JSON response:', response.status, text.slice(0, 200))
+
+        if (response.status === 413) {
+          throw new Error('Image is too large. Please use a smaller image.')
+        } else if (response.status === 429) {
+          throw new Error('Too many requests. Please wait a moment and try again.')
+        } else if (response.status >= 500) {
+          throw new Error('Service temporarily unavailable. Please try again later.')
+        } else {
+          throw new Error('Unable to connect to the service. Please try again.')
+        }
+      }
+
       const result = await response.json()
 
       if (!response.ok) {
@@ -98,6 +116,11 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         throw new Error(result.error || 'Transformation failed')
       }
     } catch (err) {
+      // Handle JSON parse errors specifically
+      if (err instanceof SyntaxError) {
+        setTransformError('Service returned an unexpected response. Please try again.')
+        return
+      }
       setTransformError(err instanceof Error ? err.message : 'Transformation failed')
     } finally {
       setIsTransforming(false)
