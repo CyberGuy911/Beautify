@@ -7,6 +7,7 @@ import { BeforeAfterSlider } from "@/components/before-after-slider"
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"]
 const ACCEPTED_EXTENSIONS = ".jpg, .jpeg, .png, .webp"
+const MAX_IMAGE_SIZE = 4 * 1024 * 1024 // 4MB (leaves room for base64 overhead)
 
 interface UploadZoneProps {
   onFileAccepted?: (file: File) => void
@@ -38,6 +39,11 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
 
       if (!isValidFileType(file)) {
         setError("Please upload a JPEG, PNG, or WebP image")
+        return
+      }
+
+      if (file.size > MAX_IMAGE_SIZE) {
+        setError("Image too large. Please use an image under 4MB.")
         return
       }
 
@@ -84,22 +90,16 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         body: JSON.stringify({ image: previewUrl }),
       })
 
-      // Check content-type before parsing as JSON
-      const contentType = response.headers.get('content-type') || ''
-      if (!contentType.includes('application/json')) {
-        // Server returned non-JSON response (error page, HTML, etc.)
+      // Check content-type before parsing to handle infrastructure errors
+      const contentType = response.headers.get('content-type')
+      if (!contentType?.includes('application/json')) {
         const text = await response.text()
-        console.error('Non-JSON response:', response.status, text.slice(0, 200))
-
-        if (response.status === 413) {
-          throw new Error('Image is too large. Please use a smaller image.')
-        } else if (response.status === 429) {
-          throw new Error('Too many requests. Please wait a moment and try again.')
-        } else if (response.status >= 500) {
-          throw new Error('Service temporarily unavailable. Please try again later.')
-        } else {
-          throw new Error('Unable to connect to the service. Please try again.')
-        }
+        throw new Error(
+          text.toLowerCase().includes('request entity too large') ||
+          text.toLowerCase().includes('payload too large')
+            ? 'Image is too large. Please use a smaller image (under 4MB).'
+            : 'Service temporarily unavailable. Please try again.'
+        )
       }
 
       const result = await response.json()
@@ -116,11 +116,6 @@ export function UploadZone({ onFileAccepted, disabled = false }: UploadZoneProps
         throw new Error(result.error || 'Transformation failed')
       }
     } catch (err) {
-      // Handle JSON parse errors specifically
-      if (err instanceof SyntaxError) {
-        setTransformError('Service returned an unexpected response. Please try again.')
-        return
-      }
       setTransformError(err instanceof Error ? err.message : 'Transformation failed')
     } finally {
       setIsTransforming(false)
